@@ -1,89 +1,87 @@
 # 🗺️ PROJECT ROADMAP: ULTIMATE TIC-TAC-TOE
 
-Este documento define los hitos de desarrollo. Úsalo como contexto para generar código paso a paso.
+This document defines the development milestones. Use it as context to generate code step-by-step.
 
-## ✅ FASE 1: Core Engine (Python Backend) - COMPLETADO
-**Objetivo:** Tener la lógica del juego 100% funcional y testeada sin interfaz gráfica.
+## ✅ PHASE 1: Core Engine (Python Backend) - COMPLETED
+**Objective:** Have the game logic 100% functional and tested without a graphical interface.
 
-- [x] **Estructura de Datos del Tablero:**
-    - Crear clase `UltimateBoard`.
-    - Representación de 9 tableros de 3x3 (Estructura jerárquica).
-    - Estado de victoria por tablero pequeño.
-- [x] **Lógica de Movimiento y Validación:**
-    - Implementar `make_move(board_row, board_col, cell_row, cell_col)`.
-    - **CRÍTICO:** Implementar validación de "Next Valid Board".
-    - **CRÍTICO:** Implementar "Open Board Rule".
-- [x] **Detección de Victoria Global:**
-    - Verificar si 3 tableros pequeños alineados han sido ganados.
-- [x] **Tests Unitarios (Pytest):**
-    - Cobertura de victoria, regla de libertad y estados iniciales.
+- [x] **Board Data Structure:**
+    - Create `UltimateBoard` class.
+    - Representation of 9 3x3 boards (Hierarchical structure).
+    - Win state per small board.
+- [x] **Movement & Validation Logic:**
+    - Implement `make_move(board_row, board_col, cell_row, cell_col)`.
+    - **CRITICAL:** Implement "Next Valid Board" validation.
+    - **CRITICAL:** Implement "Open Board Rule".
+- [x] **Global Win Detection:**
+    - Verify if 3 aligned small boards have been won.
+- [x] **Unit Tests (Pytest):**
+    - Coverage for wins, freedom rule, and initial states.
 
-## ✅ FASE 2: API & Agentes (Backend) - COMPLETADO
-**Objetivo:** Exponer el juego al mundo y preparar el terreno para la IA.
+## ✅ PHASE 2: API & Agents (Backend) - COMPLETED
+**Objective:** Expose the game to the world and prepare the ground for AI.
 
-- [x] **Sistema de Agentes (Abstract Base Class):**
-    - Crear `BaseAgent` con método `get_move(game_state)`.
-- [x] **Agente Random:**
-    - Crear `RandomAgent` para pruebas de validación.
-- [x] **API REST con FastAPI:**
-    - Endpoints `/new-game`, `/move`, `/state` implementados y funcionales.
-- [x] **Integración de IA en API:**
-    - Modo PvAI donde el agente responde automáticamente.
+- [x] **Agent System (Abstract Base Class):**
+    - Create `BaseAgent` with `get_move(game_state)` method.
+- [x] **Random Agent:**
+    - Create `RandomAgent` for validation testing.
+- [x] **REST API with FastAPI:**
+    - Endpoints `/new-game`, `/move`, `/state` implemented and functional.
+- [x] **AI Integration in API:**
+    - PvAI mode where the agent responds automatically.
 
-## ✅ FASE 3: Frontend Base (React) - COMPLETADO
-**Objetivo:** Visualizar el estado del juego.
+## ✅ PHASE 3: Frontend Base (React) - COMPLETED
+**Objective:** Visualize the game state.
 
-- [x] **Setup Inicial:**
-    - React + Vite + Tailwind CSS v4 con configuración PostCSS.
-- [x] **Componentes UI:**
-    - `SmallBoard` y `BigBoard` con renderizado jerárquico.
-- [x] **Visualización de Reglas:**
-    - Resaltado de tableros válidos y deshabilitación de celdas inválidas.
-- [x] **Conexión API:**
-    - Hook `useGameState` con llamadas fetch y manejo de errores.
+- [x] **Initial Setup:**
+    - React + Vite + Tailwind CSS v4 with PostCSS configuration.
+- [x] **UI Components:**
+    - `SmallBoard` and `BigBoard` with hierarchical rendering.
+- [x] **Rules Visualization:**
+    - Highlighting valid boards and disabling invalid cells.
+- [x] **API Connection:**
+    - `useGameState` hook with fetch calls and error handling.
 
-## ✅ FASE 4: Pulido Visual y UX - COMPLETADO
-**Objetivo:** Elevar la estética del juego a un nivel premium y mejorar la interacción.
+## ✅ PHASE 4: Visual Polish & UX - COMPLETED
+**Objective:** Elevate the game aesthetics to a premium level and improve interaction.
 
-- [x] **Diseño Estético (Aesthetics):**
-    - Implementar una paleta de colores moderna y armónica (Cyberpunk/Neon).
-    - Usar tipografía premium (Inter & Space Grotesk).
-    - Añadir efectos de glow y neón sutiles.
-- [x] **Animaciones y Micro-interacciones:**
-    - Animación suave al colocar una ficha (Framer Motion).
-    - Transiciones de color al resaltar tableros.
-    - Animación de victoria para tableros pequeños.
+- [x] **Aesthetic Design (Aesthetics):**
+    - Implement a modern and harmonic color palette (Cyberpunk/Neon).
+    - Use premium typography (Inter & Space Grotesk).
+    - Add subtle glow and neon effects.
+- [x] **Animations & Micro-interactions:**
+    - Smooth animation when placing a piece (Framer Motion).
+    - Color transitions when highlighting boards.
+    - Win animation for small boards.
 - [x] **Responsive Design:**
-    - Asegurar que el tablero sea perfectamente jugable en móviles.
+    - Ensure the board is perfectly playable on mobile.
 
-## ✨ FASE 5: Funcionalidades Premium (EN PROCESO)
-**Objetivo:** Añadir extras que mejoren la experiencia y preparar la simulación.
+## ✨ PHASE 5: Premium Features (IN PROGRESS)
+**Objective:** Add extras that improve the experience and prepare the simulation.
 
-- [X] **Animación de Victoria Global:**
-    - Efecto de "System Override" o explosión de partículas cuando se gana la partida.
-- [x] **Modo Fullscreen:**
-    - Botón para jugar en pantalla completa e inmersiva (Solo el tablero visible).
-- [x] **Balance de Reglas:**
-    - Obligar el inicio en el tablero central (Fijado en backend).
-- [ ] **Game Over Screen Avanzada:**
-    - Modal con efectos visuales y estadísticas de la partida.
+- [X] **Global Win Animation:**
+    - "System Override" effect or particle explosion when the game is won.
+- [x] **Fullscreen Mode:**
+    - Button to play in immersive fullscreen (Only the board visible).
+- [x] **Rules Balance:**
+    - Force start in the central board (Fixed in backend).
 
-## 🕹️ FASE 5: Modos Avanzados y Simulación
-**Objetivo:** Preparar el camino para el entrenamiento de IA.
+## 🕹️ PHASE 5: Advanced Modes & Simulation
+**Objective:** Prepare the path for AI training.
 
-- [ ] **Game Over Screen Avanzada:**
-    - Modal con efectos visuales y estadísticas de la partida.
-- [ ] **Script Headless (AI vs AI):**
-    - Script en Python (`simulate_games.py`) para generar logs de partidas masivas.
+- [ ] **Advanced Game Over Screen:**
+    - Modal with visual effects and match statistics.
+- [ ] **Headless Script (AI vs AI):**
+    - Python script (`simulate_games.py`) to generate massive game logs.
 
-## 🧠 FASE 6: Entrenamiento de IA (Parte 2)
-**Objetivo:** Crear un agente inteligente (LLM o RL).
+## 🧠 PHASE 6: AI Training (Part 2)
+**Objective:** Create an intelligent agent (LLM or RL).
 
 - [ ] **Data Pipeline:**
-    - Guardado de estados en formato JSONL para entrenamiento.
+    - Saving states in JSONL format for training.
 - [ ] **Gym Environment:**
-    - Adaptación a interfaz OpenAI Gym.
-- [ ] **Entrenamiento:**
-    - Fine-tuning o Reinforcement Learning.
-- [ ] **Integración Smart Agent:**
-    - Implementar el modelo entrenado en la interfaz de juego.
+    - Adaptation to OpenAI Gym interface.
+- [ ] **Training:**
+    - Fine-tuning or Reinforcement Learning.
+- [ ] **Smart Agent Integration:**
+    - Implement the trained model in the game interface.

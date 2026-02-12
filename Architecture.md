@@ -1,57 +1,57 @@
 # 📋 PROJECT BLUEPRINT: ULTIMATE TIC-TAC-TOE (AI & WEB)
 
-## 1. RESUMEN DEL PROYECTO
-* **Nombre:** Ultimate Tic-Tac-Toe (Project UTTT-AI)
-* **Objetivo:** Crear un motor robusto del juego "Tres en Raya Definitivo" que sirva como entorno de entrenamiento (Gym) para agentes de Inteligencia Artificial y exponga una interfaz jugable para humanos.
-* **Tipo:** Hybrid Application (Python Game Engine + Web UI).
+## 1. PROJECT SUMMARY
+* **Name:** Ultimate Tic-Tac-Toe (Project UTTT-AI)
+* **Objective:** Create a robust engine for the "Ultimate Tic-Tac-Toe" game that serves as a training environment (Gym) for Artificial Intelligence agents and exposes a playable interface for humans.
+* **Type:** Hybrid Application (Python Game Engine + Web UI).
 
-## 2. REGLAS DE JUEGO (ESPECÍFICAS)
-1.  **Tablero:** 9 tableros pequeños de 3x3 dispuestos en una cuadrícula de 3x3 (Total 81 casillas).
-2.  **Movimiento:**
-    * Jugador 1 mueve donde quiera en el inicio del tablero central (x = 2, y = 2).
-    * Si Jugador A mueve en la casilla local (x, y) de un tablero pequeño, el Jugador B *debe* jugar en el tablero pequeño ubicado en la posición global (x, y).
-3.  **Regla de Libertad (Open Board Rule):** Si el movimiento anterior envía al jugador a un tablero que ya está **ganado** o **lleno**, el jugador tiene libertad para jugar en **cualquier** casilla vacía de **cualquier** tablero no decidido.
-4.  **Victoria:**
-    * Se gana un tablero pequeño haciendo 3 en raya normal.
-    * Se gana el juego haciendo 3 en raya con los tableros pequeños ganados.
+## 2. GAME RULES (SPECIFIC)
+1.  **Board:** 9 small 3x3 boards arranged in a 3x3 grid (Total 81 cells).
+2.  **Movement:**
+    * Player 1 moves wherever they want at the start of the central board (x = 2, y = 2).
+    * If Player A moves in local cell (x, y) of a small board, Player B *must* play in the small board located at global position (x, y).
+3.  **Freedom Rule (Open Board Rule):** If the previous move sends the player to a board that is already **won** or **full**, the player is free to play in **any** empty cell of **any** undecided board.
+4.  **Victory:**
+    * A small board is won by making a normal 3-in-a-row.
+    * The game is won by making a 3-in-a-row with the won small boards.
 
-## 3. TECH STACK (Estricto)
-* **Core Logic / AI:** Python 3.11+ (Tipado estricto).
+## 3. TECH STACK (Strict)
+* **Core Logic / AI:** Python 3.11+ (Strict typing).
 * **API Server:** FastAPI (Python).
 * **Frontend:** React + TypeScript + Vite.
-* **Estilos:** Tailwind CSS.
-* **Gestión de Estado (Front):** Zustand o React Context (para manejar el estado complejo del tablero).
-* **Intercambio de datos:** JSON (REST API).
+* **Styles:** Tailwind CSS.
+* **State Management (Front):** Zustand or React Context (to handle complex board state).
+* **Data Exchange:** JSON (REST API).
 
-## 4. ARQUITECTURA
-Usaremos una **Arquitectura Hexagonal (Ports & Adapters)** simplificada:
-* **Domain (Núcleo):** `UltimateTicTacToe` class. Contiene toda la lógica, validaciones y estado. No sabe nada de API ni de Frontend.
-* **Agents (AI):** Una clase abstracta `BaseAgent`. Las implementaciones (RandomAgent, MinimaxAgent, LLMAgent) heredarán de ella.
-* **Application (API):** Endpoints de FastAPI que reciben un movimiento, llaman al Núcleo, y devuelven el nuevo estado + el movimiento de la IA (si aplica).
-* **Infrastructure (UI):** React consumiendo la API.
+## 4. ARCHITECTURE
+We will use a simplified **Hexagonal Architecture (Ports & Adapters)**:
+* **Domain (Core):** `UltimateTicTacToe` class. Contains all logic, validations, and state. Knows nothing about API or Frontend.
+* **Agents (AI):** An abstract class `BaseAgent`. Implementations (RandomAgent, MinimaxAgent, LLMAgent) will inherit from it.
+* **Application (API):** FastAPI endpoints that receive a move, call the Core, and return the new state + AI move (if applicable).
+* **Infrastructure (UI):** React consuming the API.
 
-## 5. ESTRUCTURA DE CARPETAS PREFERIDA
+## 5. PREFERRED FOLDER STRUCTURE
 /project-root
   /backend (Python)
     /app
-      /core (Lógica del juego: board.py, rules.py)
+      /core (Game logic: board.py, rules.py)
       /agents (BaseAgent, RandomAgent, LLMAgent)
       /api (FastAPI routes, schemas)
-      /tests (Unit tests para reglas)
+      /tests (Unit tests for rules)
   /frontend (React)
     /src
       /components (Board, Cell, GameInfo)
       /hooks (useGameEngine)
-      /types (Interfaces TS compartidas con esquemas Python)
+      /types (TS Interfaces shared with Python schemas)
 
-## 6. REGLAS DE CODIFICACIÓN
-1.  **Python:** Uso estricto de Type Hints. Clases claras. Docstrings explicando la lógica (Por ejemplo de la regla de "Tablero Abierto").
-2.  **Separación de Responsabilidades:** El Frontend *no calcula* si alguien ganó, solo *renderiza* el estado que le da el Backend. La "Verdad" está siempre en Python.
-3.  **Nomenclatura:** Variables en inglés (`currentBoard`, `winner`, `nextMove`).
-4.  **Testing:** TDD ligero para la lógica de victoria (es fácil tener bugs en las diagonales del Ultimate TTT).
+## 6. CODING RULES
+1.  **Python:** Strict use of Type Hints. Clear classes. Docstrings explaining logic (e.g., "Open Board" rule).
+2.  **Separation of Concerns:** The Frontend *does not calculate* if someone won, it only *renders* the state given by the Backend. The "Truth" is always in Python.
+3.  **Naming:** Variables in English (`currentBoard`, `winner`, `nextMove`).
+4.  **Testing:** Light TDD for victory logic (it is easy to have bugs in Ultimate TTT diagonals).
 
-## 7. FUNCIONALIDADES CORE (MVP)
-1.  **Game Engine (Python):** Clase capaz de jugar una partida completa en consola/memoria, validando movimientos ilegales y detectando victorias.
-2.  **Agent Interface:** Sistema para conectar una clase Python como "Jugador 2".
-3.  **API REST:** Endpoint `POST /move` que recibe `(board_index, cell_index)` y devuelve el nuevo estado completo.
-4.  **Web UI:** Tablero visual que resalte las jugadas válidas y bloquee las inválidas.
+## 7. CORE FEATURES (MVP)
+1.  **Game Engine (Python):** Class capable of playing a full game in console/memory, validating illegal moves, and detecting wins.
+2.  **Agent Interface:** System to connect a Python class as "Player 2".
+3.  **API REST:** Endpoint `POST /move` that receives `(board_index, cell_index)` and returns the new full state.
+4.  **Web UI:** Visual board that highlights valid moves and blocks invalid ones.
