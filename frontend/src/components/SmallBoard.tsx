@@ -1,5 +1,8 @@
 import React from 'react';
 import type { SmallBoardState } from '../types/game';
+import { Cell } from './Cell';
+import { cn } from '../lib/utils';
+import { motion } from 'framer-motion';
 
 interface SmallBoardProps {
     boardState: SmallBoardState;
@@ -12,44 +15,55 @@ interface SmallBoardProps {
 export const SmallBoard: React.FC<SmallBoardProps> = ({
     boardState, boardRow, boardCol, isValidTarget, onCellClick
 }) => {
-    // Determine background color based on validity and winner
-    let bgColor = "bg-white";
-    if (boardState.winner === "X") bgColor = "bg-red-100";
-    if (boardState.winner === "O") bgColor = "bg-blue-100";
-    if (!boardState.winner && isValidTarget) bgColor = "bg-yellow-50";
-
-    // Overlay if won
-    const showOverlay = !!boardState.winner;
+    // Determine background/border based on validity and winner
+    const isWinnerX = boardState.winner === "X";
+    const isWinnerO = boardState.winner === "O";
+    const isActive = !boardState.winner && isValidTarget;
 
     return (
-        <div className={`relative p-1 gap-1 grid grid-cols-3 grid-rows-3 border-2 ${isValidTarget && !boardState.winner ? 'border-yellow-400 shadow-md' : 'border-gray-800'} ${bgColor}`}>
+        <div className={cn(
+            "relative p-1 gap-1 grid grid-cols-3 grid-rows-3 rounded-lg transition-all duration-300",
+            "bg-zinc-900 border-2 aspect-square",
+            // Border colors
+            isActive ? "border-yellow-400 shadow-[0_0_15px_rgba(250,204,21,0.3)] ring-1 ring-yellow-400" : "border-zinc-800",
+            isWinnerX && "border-cyan-400/50 bg-cyan-950/10",
+            isWinnerO && "border-fuchsia-400/50 bg-fuchsia-950/10",
+        )}>
             {boardState.grid.map((row, rIdx) => (
                 row.map((cell, cIdx) => (
-                    <button
+                    <Cell
                         key={`${rIdx}-${cIdx}`}
-                        className={`
-                            h-8 w-8 flex items-center justify-center text-xl font-bold border border-gray-300
-                            ${!cell && isValidTarget && !boardState.winner ? 'hover:bg-yellow-200 cursor-pointer' : 'cursor-default'}
-                            ${cell === 'X' ? 'text-red-600' : 'text-blue-600'}
-                        `}
+                        value={cell as 'X' | 'O' | null}
                         onClick={() => {
-                            if (!cell && isValidTarget && !boardState.winner) {
+                            if (!cell && isActive) {
                                 onCellClick(boardRow, boardCol, rIdx, cIdx);
                             }
                         }}
-                        disabled={!!cell || !!boardState.winner || !isValidTarget}
-                    >
-                        {cell}
-                    </button>
+                        disabled={!!cell || !!boardState.winner || !isActive}
+                        isValidMove={isActive && !cell}
+                    />
                 ))
             ))}
 
-            {showOverlay && (
-                <div className="absolute inset-0 flex items-center justify-center bg-black/10 text-6xl font-extrabold opacity-40 select-none">
-                    <span className={boardState.winner === 'X' ? 'text-red-800' : 'text-blue-800'}>
+            {/* Winner Overlay */}
+            {boardState.winner && (
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    className="absolute inset-0 flex items-center justify-center bg-zinc-950/60 rounded-lg backdrop-blur-[1px] z-10"
+                >
+                    <motion.div
+                        initial={{ scale: 0.5, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        transition={{ type: "spring", stiffness: 200, damping: 15 }}
+                        className={cn(
+                            "text-8xl font-display font-bold select-none drop-shadow-[0_0_20px_rgba(0,0,0,0.8)]",
+                            isWinnerX ? "text-cyan-400 drop-shadow-[0_0_10px_rgba(34,211,238,0.5)]" : "text-fuchsia-400 drop-shadow-[0_0_10px_rgba(232,121,249,0.5)]"
+                        )}
+                    >
                         {boardState.winner}
-                    </span>
-                </div>
+                    </motion.div>
+                </motion.div>
             )}
         </div>
     );

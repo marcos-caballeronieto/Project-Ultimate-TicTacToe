@@ -1,4 +1,4 @@
-export type Player = 'X' | 'O' | null;
+export type Player = 'X' | 'O' | 'Draw' | null;
 
 export interface SmallBoardState {
     grid: Player[][];

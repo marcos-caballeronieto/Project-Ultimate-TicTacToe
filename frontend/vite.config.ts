@@ -16,9 +16,18 @@ export default defineConfig({
       // Or better: update frontend to use /api prefix?
       // The backend defines /new-game, /move. Not /api/new-game.
       // So I should proxy /new-game, /move, /state directly.
-      '/new-game': 'http://127.0.0.1:8000',
-      '/move': 'http://127.0.0.1:8000',
-      '/state': 'http://127.0.0.1:8000',
+      '/new-game': {
+        target: 'http://127.0.0.1:8000',
+        changeOrigin: true,
+      },
+      '/move': {
+        target: 'http://127.0.0.1:8000',
+        changeOrigin: true,
+      },
+      '/state': {
+        target: 'http://127.0.0.1:8000',
+        changeOrigin: true,
+      },
     },
   },
 })

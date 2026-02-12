@@ -5,6 +5,7 @@ export const useGameState = () => {
     const [gameState, setGameState] = useState<GameState | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
+    const [isVsAi, setIsVsAi] = useState<boolean>(false);
 
     const fetchState = async () => {
         try {
@@ -19,6 +20,7 @@ export const useGameState = () => {
 
     const newGame = async (vsAi: boolean = false) => {
         setLoading(true);
+        setIsVsAi(vsAi);
         try {
             const res = await fetch(`/new-game?vs_ai=${vsAi}`, { method: 'POST' });
             if (!res.ok) throw new Error('Failed to start new game');
@@ -55,5 +57,5 @@ export const useGameState = () => {
         fetchState();
     }, []);
 
-    return { gameState, loading, error, newGame, makeMove };
+    return { gameState, loading, error, newGame, makeMove, isVsAi };
 };

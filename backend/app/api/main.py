@@ -35,9 +35,19 @@ class MoveRequest(BaseModel):
 @app.post("/new-game")
 def new_game(vs_ai: bool = False):
     global game_instance, is_vs_ai
+    import sys
+    import backend.app.core.game
+    print("Initializing new game...")
     game_instance = UltimateTicTacToe()
+    print(f"New game initialized. Next board: {game_instance.next_board}")
     is_vs_ai = vs_ai
-    return {"message": "New game started", "vs_ai": is_vs_ai}
+    return {
+        "message": "New game started", 
+        "vs_ai": is_vs_ai,
+        "debug_next_board": game_instance.next_board,
+        "debug_game_file": backend.app.core.game.__file__,
+        "debug_sys_path": sys.path
+    }
 
 @app.get("/state")
 def get_state():

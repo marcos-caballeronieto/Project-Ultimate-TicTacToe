@@ -45,7 +45,8 @@ class UltimateTicTacToe:
     def __init__(self):
         self.board: List[List[SmallBoard]] = [[SmallBoard() for _ in range(3)] for _ in range(3)]
         self.current_player: Player = "X"
-        self.next_board: Optional[Tuple[int, int]] = None  # (row, col) of the board where the next move must be
+        self.next_board: Optional[Tuple[int, int]] = (1, 1)  # Players must start in the central board
+        print(f"[DEBUG] Game initialized. next_board={(1, 1)}")
         self.winner: Optional[Player] = None
 
     def get_valid_moves(self) -> List[Tuple[int, int, int, int]]:
@@ -87,6 +88,21 @@ class UltimateTicTacToe:
         # Validate move
         valid_moves = self.get_valid_moves()
         if (board_row, board_col, cell_row, cell_col) not in valid_moves:
+            return False
+
+        # Force first move to be in center (Redundant safety check)
+        # Check if board is empty (first move)
+        is_first_move = True
+        for r in range(3):
+            for c in range(3):
+                for sr in range(3):
+                    for sc in range(3):
+                        if self.board[r][c].grid[sr][sc] is not None:
+                            is_first_move = False
+                            break
+        
+        if is_first_move and (board_row != 1 or board_col != 1):
+            print("[DEBUG] Attempted first move outside center board. Rejected.")
             return False
 
         # Execute move
@@ -135,6 +151,11 @@ class UltimateTicTacToe:
             self.winner = winners_grid[0][2]
             return self.winner
             
+        # Check for Draw
+        if not self.get_valid_moves() and not self.winner:
+            self.winner = "Draw"
+            return "Draw"
+
         return None
 
     def to_dict(self) -> dict:

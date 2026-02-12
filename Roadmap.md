@@ -2,80 +2,88 @@
 
 Este documento define los hitos de desarrollo. Úsalo como contexto para generar código paso a paso.
 
-## 🏁 FASE 1: Core Engine (Python Backend)
+## ✅ FASE 1: Core Engine (Python Backend) - COMPLETADO
 **Objetivo:** Tener la lógica del juego 100% funcional y testeada sin interfaz gráfica.
 
-- [ ] **Estructura de Datos del Tablero:**
+- [x] **Estructura de Datos del Tablero:**
     - Crear clase `UltimateBoard`.
-    - Representación de 9 tableros de 3x3 (Array 9x9 o lista de objetos `SmallBoard`).
+    - Representación de 9 tableros de 3x3 (Estructura jerárquica).
     - Estado de victoria por tablero pequeño.
-- [ ] **Lógica de Movimiento y Validación:**
-    - Implementar `make_move(global_x, global_y, player)`.
+- [x] **Lógica de Movimiento y Validación:**
+    - Implementar `make_move(board_row, board_col, cell_row, cell_col)`.
     - **CRÍTICO:** Implementar validación de "Next Valid Board".
-    - **CRÍTICO:** Implementar "Open Board Rule" (Si el siguiente tablero está lleno/ganado, el jugador elige cualquiera).
-- [ ] **Detección de Victoria Global:**
+    - **CRÍTICO:** Implementar "Open Board Rule".
+- [x] **Detección de Victoria Global:**
     - Verificar si 3 tableros pequeños alineados han sido ganados.
-- [ ] **Tests Unitarios (Pytest):**
-    - Testear victoria simple.
-    - Testear regla de libertad (Open Board).
-    - Testear empates.
+- [x] **Tests Unitarios (Pytest):**
+    - Cobertura de victoria, regla de libertad y estados iniciales.
 
-> **Contexto para IA:** Enfócate en `backend/app/core/game.py`. La lógica debe ser pura y sin dependencias de API.
-
-## 🔌 FASE 2: API & Agentes (Backend)
+## ✅ FASE 2: API & Agentes (Backend) - COMPLETADO
 **Objetivo:** Exponer el juego al mundo y preparar el terreno para la IA.
 
-- [ ] **Sistema de Agentes (Abstract Base Class):**
+- [x] **Sistema de Agentes (Abstract Base Class):**
     - Crear `BaseAgent` con método `get_move(game_state)`.
-    - Crear `RandomAgent` (toma decisiones aleatorias válidas) para pruebas.
-- [ ] **API REST con FastAPI:**
-    - `POST /new-game`: Inicia partida (PvP o PvAI).
-    - `POST /move`: Recibe coordenadas, valida, actualiza estado.
-    - `GET /state`: Devuelve el JSON completo del tablero actual.
-- [ ] **Integración de IA en API:**
-    - Si el modo es PvAI, el endpoint `/move` debe gatillar automáticamente el movimiento del agente después del humano.
+- [x] **Agente Random:**
+    - Crear `RandomAgent` para pruebas de validación.
+- [x] **API REST con FastAPI:**
+    - Endpoints `/new-game`, `/move`, `/state` implementados y funcionales.
+- [x] **Integración de IA en API:**
+    - Modo PvAI donde el agente responde automáticamente.
 
-> **Contexto para IA:** Usa Pydantic para validar los requests en `backend/app/api`.
-
-## 🎨 FASE 3: Frontend Base (React)
+## ✅ FASE 3: Frontend Base (React) - COMPLETADO
 **Objetivo:** Visualizar el estado del juego.
 
-- [ ] **Setup Inicial:**
-    - Instalar React, Tailwind, Vite.
-    - Configurar proxy para llamar al backend local.
-- [ ] **Componentes UI:**
-    - `SmallBoard`: Renderiza 3x3 celdas. Muestra si está ganado (overlay X o O).
-    - `BigBoard`: Renderiza los 9 `SmallBoard`.
-- [ ] **Visualización de Reglas:**
-    - **Highlight:** Resaltar visualmente en qué tablero *debe* jugar el usuario.
-    - **Disabled:** Deshabilitar clics en tableros inválidos.
-- [ ] **Conexión API:**
-    - Hook `useGameState` para sincronizar con el backend.
+- [x] **Setup Inicial:**
+    - React + Vite + Tailwind CSS v4 con configuración PostCSS.
+- [x] **Componentes UI:**
+    - `SmallBoard` y `BigBoard` con renderizado jerárquico.
+- [x] **Visualización de Reglas:**
+    - Resaltado de tableros válidos y deshabilitación de celdas inválidas.
+- [x] **Conexión API:**
+    - Hook `useGameState` con llamadas fetch y manejo de errores.
 
-## 🕹️ FASE 4: Modos de Juego y Menú
-**Objetivo:** Experiencia de usuario completa.
+## ✅ FASE 4: Pulido Visual y UX - COMPLETADO
+**Objetivo:** Elevar la estética del juego a un nivel premium y mejorar la interacción.
 
-- [ ] **Menú Principal:**
-    - Pantalla de inicio con botones: "1 vs 1 (Local)" y "1 vs AI".
-- [ ] **Gestión de Turnos UI:**
-    - Mostrar claramente "Turno de X" o "Turno de O".
-    - Manejar estados de "Cargando" cuando la IA está "pensando".
-- [ ] **Game Over Screen:**
-    - Modal que anuncia al ganador y botón de "Jugar de nuevo".
+- [x] **Diseño Estético (Aesthetics):**
+    - Implementar una paleta de colores moderna y armónica (Cyberpunk/Neon).
+    - Usar tipografía premium (Inter & Space Grotesk).
+    - Añadir efectos de glow y neón sutiles.
+- [x] **Animaciones y Micro-interacciones:**
+    - Animación suave al colocar una ficha (Framer Motion).
+    - Transiciones de color al resaltar tableros.
+    - Animación de victoria para tableros pequeños.
+- [x] **Responsive Design:**
+    - Asegurar que el tablero sea perfectamente jugable en móviles.
+
+## ✨ FASE 5: Funcionalidades Premium (EN PROCESO)
+**Objetivo:** Añadir extras que mejoren la experiencia y preparar la simulación.
+
+- [X] **Animación de Victoria Global:**
+    - Efecto de "System Override" o explosión de partículas cuando se gana la partida.
+- [x] **Modo Fullscreen:**
+    - Botón para jugar en pantalla completa e inmersiva (Solo el tablero visible).
+- [x] **Balance de Reglas:**
+    - Obligar el inicio en el tablero central (Fijado en backend).
+- [ ] **Game Over Screen Avanzada:**
+    - Modal con efectos visuales y estadísticas de la partida.
+
+## 🕹️ FASE 5: Modos Avanzados y Simulación
+**Objetivo:** Preparar el camino para el entrenamiento de IA.
+
+- [ ] **Game Over Screen Avanzada:**
+    - Modal con efectos visuales y estadísticas de la partida.
 - [ ] **Script Headless (AI vs AI):**
-    - Script en Python (`simulate_games.py`) que haga jugar a dos `RandomAgent` entre sí 100 veces y guarde los logs.
+    - Script en Python (`simulate_games.py`) para generar logs de partidas masivas.
 
-> **Contexto para IA:** El script headless es vital para generar datasets futuros.
-
-## 🧠 FASE 5 (FUTURO): Entrenamiento de IA (Parte 2)
+## 🧠 FASE 6: Entrenamiento de IA (Parte 2)
 **Objetivo:** Crear un agente inteligente (LLM o RL).
 
 - [ ] **Data Pipeline:**
-    - Modificar el script headless para guardar partidas en formato JSONL o CSV (Estado -> Movimiento -> Resultado).
+    - Guardado de estados en formato JSONL para entrenamiento.
 - [ ] **Gym Environment:**
-    - Adaptar la clase `UltimateBoard` para que cumpla con la interfaz OpenAI Gym (opcional, pero recomendado).
+    - Adaptación a interfaz OpenAI Gym.
 - [ ] **Entrenamiento:**
-    - Opción A: Fine-tuning de un LLM pequeño con los logs de partidas.
-    - Opción B: Reinforcement Learning (PPO/DQN).
-- [ ] **Integración:**
-    - Crear `SmartAgent` que herede de `BaseAgent` y cargue el modelo entrenado.
+    - Fine-tuning o Reinforcement Learning.
+- [ ] **Integración Smart Agent:**
+    - Implementar el modelo entrenado en la interfaz de juego.

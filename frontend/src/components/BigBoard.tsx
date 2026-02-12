@@ -1,6 +1,7 @@
 import React from 'react';
 import type { GameState } from '../types/game';
 import { SmallBoard } from './SmallBoard';
+import { cn } from '../lib/utils';
 
 interface BigBoardProps {
     gameState: GameState;
@@ -9,36 +10,36 @@ interface BigBoardProps {
 
 export const BigBoard: React.FC<BigBoardProps> = ({ gameState, onMove }) => {
     // Helper to check if a specific board is the valid target
-    const isNextBoard = (r: number, c: number) => {
-        if (!gameState.next_board) return true; // Open board rule (mostly, unless specific logic in state)
-        // Wait, if next_board is null, it means open board rule OR game over.
-        // But if game over, winner is set.
-        // If not game over and next_board is null, any *valid* board is playable.
-        // A valid board is one that is not full and not won.
-
-        const [nr, nc] = gameState.next_board;
-        return r === nr && c === nc;
-    };
-
     const canPlayIn = (r: number, c: number, board: any) => {
         if (gameState.winner) return false;
         if (board.winner) return false;
-        // Check if full? The SmallBoard component checks cell availability, but here we check board focus.
 
+        // Explicit frontend check for first move (all empty) to guarantee visual feedback
+        const isFirstMove = gameState.board.every(row => row.every(b => b.grid.flat().every(c => c === null)));
+        if (isFirstMove) {
+            return r === 1 && c === 1;
+        }
+
+        // If next_board is defined (and valid), we must play there
         if (gameState.next_board) {
             const [nr, nc] = gameState.next_board;
+            // Check if that board is actually playable. 
+            // If the target board is full/won, the backend sends next_board=null usually.
+            // But if it sent it, we follow it.
             return r === nr && c === nc;
         }
 
-        // Open board rule: Can play in any board that isn't full/won
-        // (Assuming backend sets next_board to null correctly).
-        // Since we don't track is_full in frontend easily without iterating, let's assume if it's not won and next_board is null, it's potentially playable.
-        // The SmallBoard will disable buttons if cells are full.
+        // Open board rule: Can play in any board that isn't won.
+        // (Fullness check is handled by individual cells being occupied)
         return true;
     };
 
     return (
-        <div className="grid grid-cols-3 gap-2 p-2 bg-gray-200 border-4 border-gray-900 shadow-xl">
+        <div className={cn(
+            "grid grid-cols-3 gap-3 p-3 rounded-2xl shadow-2xl transition-colors duration-500",
+            "bg-black border border-zinc-800",
+            "w-full max-w-2xl aspect-square"
+        )}>
             {gameState.board.map((row, rIdx) => (
                 row.map((board, cIdx) => (
                     <SmallBoard

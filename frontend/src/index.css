@@ -1,1 +1,27 @@
 @import "tailwindcss";
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+@theme {
+  --color-game-x: #22d3ee;
+  --color-game-o: #e879f9;
+  --color-game-active: #facc15;
+  --color-game-valid: #27272a;
+  
+  --color-bg-main: #09090b;
+  --color-bg-board: #000000;
+  --color-bg-surface: #18181b;
+  --color-grid-lines: #27272a;
+  
+  --color-text-main: #f4f4f5;
+  --color-text-muted: #71717a;
+
+  --font-sans: "Inter", sans-serif;
+  --font-display: "Space Grotesk", monospace;
+}
+
+@layer base {
+  body {
+    @apply bg-zinc-950 text-zinc-100 font-sans antialiased;
+  }
+}
