@@ -61,7 +61,20 @@ The project is evolved in distinct phases, moving from the core Python engine to
 
 ## 🛠️ Installation & Running
 
-### Backend setup (Python)
+### 🐳 Run with Docker (Recommended)
+
+The easiest way to get the project running is using Docker Compose. This will start both the backend and frontend in synchronized containers.
+
+1.  **Ensure Docker is installed** on your system.
+2.  **Run the following command** in the project root:
+    ```bash
+    docker-compose up --build
+    ```
+3.  **Access the game** at [http://localhost](http://localhost).
+
+---
+
+### 🐍 Manual Backend setup (Python)
 
 1.  Navigate to the project root.
 2.  Create and activate a virtual environment:
