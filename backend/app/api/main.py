@@ -11,6 +11,7 @@ app = FastAPI(title="Ultimate Tic-Tac-Toe API")
 origins = [
     "http://localhost:5173",
     "http://localhost:3000",
+    "https://project-ultimatetictactoe-mdzlhagln-marcos-caballeros-projects.vercel.app/"
 ]
 
 app.add_middleware(
