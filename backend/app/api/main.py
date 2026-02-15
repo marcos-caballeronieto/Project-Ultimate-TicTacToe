@@ -4,19 +4,21 @@ from pydantic import BaseModel
 from typing import Optional, List, Union
 from backend.app.core.game import UltimateTicTacToe
 from backend.app.agents.random_agent import RandomAgent
+import os
 
 app = FastAPI(title="Ultimate Tic-Tac-Toe API")
 
 # Configure CORS
-origins = [
-    "http://localhost:5173",
-    "http://localhost:3000",
-    "https://project-ultimatetictactoe-mdzlhagln-marcos-caballeros-projects.vercel.app/"
-]
+# In production (Render), set ALLOWED_ORIGINS environment variable
+# e.g., ALLOWED_ORIGINS="https://your-vercel-domain.com,http://localhost:5173"
+ALLOWED_ORIGINS = os.getenv(
+    "ALLOWED_ORIGINS", 
+    "http://localhost:5173,http://localhost:3000,https://project-ultimatetictactoe-mdzlhagln-marcos-caballeros-projects.vercel.app/"
+).split(",")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=ALLOWED_ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

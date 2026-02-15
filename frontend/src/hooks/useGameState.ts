@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import type { GameState, Move } from '../types/game';
+import { API_URL } from '../config';
 
 export const useGameState = () => {
     const [gameState, setGameState] = useState<GameState | null>(null);
@@ -9,7 +10,7 @@ export const useGameState = () => {
 
     const fetchState = async () => {
         try {
-            const res = await fetch('/state');
+            const res = await fetch(`${API_URL}/state`);
             if (!res.ok) throw new Error('Failed to fetch state');
             const data = await res.json();
             setGameState(data);
@@ -22,7 +23,7 @@ export const useGameState = () => {
         setLoading(true);
         setIsVsAi(vsAi);
         try {
-            const res = await fetch(`/new-game?vs_ai=${vsAi}`, { method: 'POST' });
+            const res = await fetch(`${API_URL}/new-game?vs_ai=${vsAi}`, { method: 'POST' });
             if (!res.ok) throw new Error('Failed to start new game');
             await fetchState();
         } catch (err: any) {
@@ -35,7 +36,7 @@ export const useGameState = () => {
     const makeMove = async (move: Move) => {
         // Optimistic update could happen here, but for MVP we wait for server
         try {
-            const res = await fetch('/move', {
+            const res = await fetch(`${API_URL}/move`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(move),
