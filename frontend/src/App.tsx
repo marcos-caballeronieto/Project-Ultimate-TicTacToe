@@ -29,8 +29,15 @@ function App() {
 
   if (!gameState) {
     return (
-      <div className="min-h-screen bg-zinc-950 flex items-center justify-center text-zinc-400 font-display animate-pulse">
-        INITIALIZING SYSTEM...
+      <div className="min-h-screen bg-zinc-950 flex flex-col items-center justify-center font-display gap-6 p-4">
+        <div className="animate-pulse text-zinc-400 tracking-widest">INITIALIZING SYSTEM...</div>
+        {error && (
+          <div className="max-w-md p-4 bg-red-950/30 border border-red-500/30 text-red-400 font-mono text-xs rounded-xl backdrop-blur-md">
+            <p className="font-bold mb-2">CRITICAL ERROR</p>
+            <p>{error}</p>
+            <p className="mt-4 text-zinc-500">Check console for details.</p>
+          </div>
+        )}
       </div>
     );
   }
