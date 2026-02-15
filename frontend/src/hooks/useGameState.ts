@@ -10,6 +10,7 @@ export const useGameState = () => {
 
     const fetchState = async () => {
         try {
+            console.log('Fetching from:', `${API_URL}/state`);
             const res = await fetch(`${API_URL}/state`);
             if (!res.ok) throw new Error('Failed to fetch state');
             const data = await res.json();
