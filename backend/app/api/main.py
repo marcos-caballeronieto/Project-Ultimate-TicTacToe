@@ -9,16 +9,16 @@ import os
 app = FastAPI(title="Ultimate Tic-Tac-Toe API")
 
 # Configure CORS
-# In production (Render), set ALLOWED_ORIGINS environment variable
-# e.g., ALLOWED_ORIGINS="https://your-vercel-domain.com,http://localhost:5173"
 ALLOWED_ORIGINS = os.getenv(
     "ALLOWED_ORIGINS", 
-    "http://localhost:5173,http://localhost:3000,https://project-ultimatetictactoe-mdzlhagln-marcos-caballeros-projects.vercel.app"
+    "http://localhost:5173,http://localhost:3000"
 ).split(",")
 
+# Add current deployment URL to allowed origins
+# For production, it's better to add specific domains or use a regex
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=ALLOWED_ORIGINS,
+    allow_origins=["*"], # For now, allow all while we fix deployment. 
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
