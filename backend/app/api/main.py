@@ -13,7 +13,7 @@ app = FastAPI(title="Ultimate Tic-Tac-Toe API")
 # e.g., ALLOWED_ORIGINS="https://your-vercel-domain.com,http://localhost:5173"
 ALLOWED_ORIGINS = os.getenv(
     "ALLOWED_ORIGINS", 
-    "http://localhost:5173,http://localhost:3000,https://project-ultimatetictactoe-mdzlhagln-marcos-caballeros-projects.vercel.app/"
+    "http://localhost:5173,http://localhost:3000,https://project-ultimatetictactoe-mdzlhagln-marcos-caballeros-projects.vercel.app"
 ).split(",")
 
 app.add_middleware(
