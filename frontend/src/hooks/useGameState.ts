@@ -10,7 +10,8 @@ export const useGameState = () => {
 
     const fetchState = async () => {
         try {
-            console.log('Fetching from:', `${API_URL}/state`);
+            console.log('VITE_API_URL ENV:', import.meta.env.VITE_API_URL);
+            console.log('Effective API_URL:', API_URL);
             const res = await fetch(`${API_URL}/state`);
             if (!res.ok) throw new Error('Failed to fetch state');
             const data = await res.json();

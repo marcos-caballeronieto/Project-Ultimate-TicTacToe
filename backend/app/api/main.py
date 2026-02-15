@@ -24,6 +24,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+@app.get("/")
+def read_root():
+    return {"status": "Ultimate Tic-Tac-Toe API is live"}
+
 # Global Game State (For MVP - Single Game Only)
 game_instance = UltimateTicTacToe()
 agent = RandomAgent()
