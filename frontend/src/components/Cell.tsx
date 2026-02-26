@@ -20,9 +20,9 @@ export const Cell: React.FC<CellProps> = ({ value, onClick, disabled, isValidMov
             disabled={disabled}
             className={cn(
                 "relative flex items-center justify-center w-full h-full rounded-sm transition-colors duration-200",
-                "bg-zinc-900/50 backdrop-blur-sm",
+                "bg-zinc-900/50 backdrop-blur-sm border border-white shadow-sm",
                 // Valid move hover effect
-                !value && !disabled && isValidMove && "hover:bg-zinc-800 cursor-pointer shadow-[inset_0_0_10px_rgba(255,255,255,0.05)]",
+                !value && !disabled && isValidMove && "hover:bg-white/10 hover:border-white cursor-pointer shadow-[inset_0_0_15px_rgba(255,255,255,0.2)]",
                 // Disabled state
                 (disabled || value) && "cursor-default",
                 // Winning cell glow

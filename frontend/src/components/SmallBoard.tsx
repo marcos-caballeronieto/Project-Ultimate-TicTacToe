@@ -22,10 +22,10 @@ export const SmallBoard: React.FC<SmallBoardProps> = ({
 
     return (
         <div className={cn(
-            "relative p-1 gap-1 grid grid-cols-3 grid-rows-3 rounded-lg transition-all duration-300",
-            "bg-zinc-900 border-2 aspect-square",
+            "relative p-1 gap-1.5 grid grid-cols-3 grid-rows-3 rounded-lg transition-all duration-300",
+            "bg-zinc-900 border-2 aspect-square shadow-lg",
             // Border colors
-            isActive ? "border-yellow-400 shadow-[0_0_15px_rgba(250,204,21,0.3)] ring-1 ring-yellow-400" : "border-zinc-800",
+            isActive ? "border-yellow-400 shadow-[0_0_15px_rgba(250,204,21,0.4)] ring-2 ring-yellow-400" : "border-white transition-colors",
             isWinnerX && "border-cyan-400/50 bg-cyan-950/10",
             isWinnerO && "border-fuchsia-400/50 bg-fuchsia-950/10",
         )}>

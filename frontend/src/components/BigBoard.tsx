@@ -36,8 +36,8 @@ export const BigBoard: React.FC<BigBoardProps> = ({ gameState, onMove }) => {
 
     return (
         <div className={cn(
-            "grid grid-cols-3 gap-3 p-3 rounded-2xl shadow-2xl transition-colors duration-500",
-            "bg-black border border-zinc-800",
+            "grid grid-cols-3 gap-4 p-4 rounded-2xl shadow-[0_0_30px_rgba(0,0,0,0.8)] transition-colors duration-500",
+            "bg-black border-2 border-white",
             "w-full max-w-2xl aspect-square"
         )}>
             {gameState.board.map((row, rIdx) => (
