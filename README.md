@@ -2,7 +2,7 @@
 
 > **A Next-Gen AI Playground & Competitive Strategy Game**
 > 
-> > 🕹️ **[Play the Live Demo Here](https://project-ultimatetictactoe-p55n4q9ys-marcos-caballeros-projects.vercel.app/)**
+> > 🕹️ **[Play the Live Demo Here](https://project-utttweb.vercel.app/)**
 > > 
 > *✨ This project was built using **planned and very organized vibe-coding** techniques to ensure high-quality software craftsmanship.*
 
@@ -63,7 +63,7 @@ The project is evolved in distinct phases, moving from the core Python engine to
 
 ## 🛠️ Installation & Running
 
-*💡 Just want to play? Check out the **[Live Demo](https://project-ultimatetictactoe-p55n4q9ys-marcos-caballeros-projects.vercel.app/)**!*
+*💡 Just want to play? Check out the **[Live Demo](https://project-utttweb.vercel.app/)**!*
 
 ### 🐳 Run with Docker (Recommended)
 
