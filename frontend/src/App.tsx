@@ -186,10 +186,6 @@ function App() {
                 <span className="text-cyan-400 font-mono">03</span>
                 <p>Highlighted sectors indicate <span className="text-yellow-400/80">valid engagement zones</span>.</p>
               </li>
-              <li className="flex gap-3">
-                <span className="text-cyan-400 font-mono">04</span>
-                <p>Compromised sectors (Full/Won) allow <span className="text-zinc-300">free tactical deployment</span> across all valid zones.</p>
-              </li>
             </ul>
           </div>
         )}
