@@ -18,7 +18,7 @@ ALLOWED_ORIGINS = os.getenv(
 # For production, it's better to add specific domains or use a regex
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"], # For now, allow all while we fix deployment. 
+    allow_origins=["https://project-utttweb.vercel.app/"], 
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
