@@ -74,7 +74,23 @@ This document defines the development milestones. Use it as context to generate 
 - [ ] **Headless Script (AI vs AI):**
     - Python script (`simulate_games.py`) to generate massive game logs.
 
-## 🧠 PHASE 6: AI Training (Part 2)
+## 🌐 PHASE 6: Multiplayer & Multi-Client Support
+**Objective:** Allow multiple users to play against each other concurrently across different sessions.
+
+- [ ] **Architecture Design:**
+    - Define WebSocket protocols and session management scheme.
+- [ ] **Backend Adaptation:**
+    - Implement room generation (`/create`, `/join`).
+    - Migrate from global game state to dictionary of sessions.
+    - Implement WebSocket connection manager.
+- [ ] **Frontend Adaptation:**
+    - Add UI to create or join a room via link/code.
+    - Replace REST polling with WebSocket listeners for real-time updates.
+- [ ] **Deployment & Persistence (Render):**
+    - Ensure compatibility with Render's Free Tier (WebSockets support).
+    - Plan for state preservation against 15-minute inactivity spin-downs (e.g., using an external free tier DB like Redis Cloud).
+
+## 🧠 PHASE 7: AI Training (Part 2)
 **Objective:** Create an intelligent agent (LLM or RL).
 
 - [ ] **Data Pipeline:**
