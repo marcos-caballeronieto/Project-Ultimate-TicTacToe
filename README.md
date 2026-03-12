@@ -65,6 +65,14 @@ The interface is designed with a **"Dark Mode First"** philosophy, featuring **C
 
 ---
 
+### 🛡️ Security & Scalability (Vercel Deployment)
+* **API Hardening:** Sanitized backend responses to remove sensitive system metadata and internal file structures.
+* **Environment Security:** Secured production API endpoints with strictly enforced HTTPS and a multi-environment variable system.
+* **Infrastructure Strategy:** Implemented a robust CORS policy to restrict backend access to authorized frontend domains only.
+* **Roadmap (Stateless Transition):** Currently refactoring toward a stateless architecture to support high-concurrency and eliminate cross-user state bleeding.
+
+---
+
 ## 🗺️ Roadmap
 
 The project is evolved in distinct phases, moving from the core Python engine to a full-fledged AI training environment.
@@ -74,7 +82,8 @@ The project is evolved in distinct phases, moving from the core Python engine to
 *   **Phase 3:** React Frontend & UI ✅
 *   **Phase 4:** Polish & UX (Animations, Responsive) ✅
 *   **Phase 5:** Premium Features (Fullscreen, Particles) 🚧
-*   **Phase 6:** Advanced AI Training (RL/LLM Integration) 📅
+*   **Phase 6:** Stateless Refactor (Transition from global server-side state to client-side state passing or database persistence to allow multiple simultaneous sessions.) 📅
+*   **Phase 7:** Advanced AI Training (RL/LLM Integration) 📅
 
 👉 **[View the detailed Roadmap](Roadmap.md)**
 
